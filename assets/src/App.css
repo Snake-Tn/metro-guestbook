@@ -1,0 +1,12 @@
+.restaurant-list{
+    padding: 20px 0px;
+
+}
+.search{
+    max-width: 800px;
+}
+.favourite{
+    padding: 0px;
+    border-radius: 10%;
+    height: 20px;
+}

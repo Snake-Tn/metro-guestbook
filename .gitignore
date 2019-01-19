@@ -1,0 +1,7 @@
+.idea
+/.web-server-pid
+/build/
+/phpunit.xml
+/vendor/
+/web/bundles/
+docker/mariadb/data/
