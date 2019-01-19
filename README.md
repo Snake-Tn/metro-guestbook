@@ -1,19 +1,12 @@
 ### Install
-This manual assumes that docker (`v>17`) and docker-compose (`v.3`) are installed on your host machine.
+This manual assumes that docker (`v>17`) and docker-compose (`v.3`) are both installed on your host machine.
 
-Once you finish all the instructions, the application will be available on http://local.metro-guestbook:8001
+Once you finish all the instructions, the application will be available on http://localhost:8001
  
 ##### download source code and cd to the root of the repo.
 ```bash
 git clone https://github.com/Snake-Tn/metro-guestbook.git
 cd metro-guestbook
-```
-
-
-##### hosts config
-Add an entry `127.0.0.1 local.metro-guestbook` to your `/etc/hosts` file:
-```bash
-sudo sh -c "echo '127.0.0.1 local.metro-guestbook' >> /etc/hosts"
 ```
 
 ##### Create docker containers:
@@ -47,7 +40,7 @@ docker exec -it metro-guestbook_php bash -c "vendor/bin/phpunit"
 
 
 #### Application DEMO
-Application is accessible on http://local.metro-guestbook:8001
+Application is accessible on http://localhost:8001
 
 
 
