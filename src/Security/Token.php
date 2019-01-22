@@ -10,11 +10,7 @@ class Token
     /**
      * @var string
      */
-    private $token;
-    /**
-     * @var int
-     */
-    private $expiresIn;
+    private $tokenKey;
 
     /**
      * @var User
@@ -22,13 +18,18 @@ class Token
     private $user;
 
     /**
+     * @var int
+     */
+    private $expiresIn;
+
+    /**
      * @param string $token
-     * @param string $userId
+     * @param User $user
      * @param int $expiresIn
      */
     public function __construct(string $token, User $user, int $expiresIn)
     {
-        $this->token = $token;
+        $this->tokenKey = $token;
         $this->user = $user;
         $this->expiresIn = $expiresIn;
     }
@@ -36,17 +37,9 @@ class Token
     /**
      * @return string
      */
-    public function getToken(): string
+    public function getTokenKey(): string
     {
-        return $this->token;
-    }
-
-    /**
-     * @return int
-     */
-    public function getExpiresIn(): int
-    {
-        return $this->expiresIn;
+        return $this->tokenKey;
     }
 
     /**
@@ -55,6 +48,14 @@ class Token
     public function getUser(): User
     {
         return $this->user;
+    }
+
+    /**
+     * @return int
+     */
+    public function getExpiresIn(): int
+    {
+        return $this->expiresIn;
     }
 
 

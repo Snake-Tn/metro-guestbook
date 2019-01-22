@@ -14,6 +14,7 @@ class Router
 
     const CONFIGURATION_MAP = [
         'POST/api/entries' => ['controller' => EntryController::class, 'method' => 'create'],
+        'POST/api/entries/([1-9]+)/is_approved' => ['controller' => EntryController::class, 'method' => 'approve'],
         'POST/api/auth' => ['controller' => AuthorizationController::class, 'method' => 'login'],
 
     ];
@@ -44,10 +45,27 @@ class Router
     private function resolve(Http\Request $request): array
     {
         foreach (self::CONFIGURATION_MAP as $routeCondition => $routeAction) {
-            if ($routeCondition === $request->getMethod() . $request->getUrlPath()) {
+            $pattern = '/^' . str_replace('/', '\\/', $routeCondition) . '$/';
+            $subject = $request->getMethod() . $request->getUrlPath();
+            if (preg_match($pattern, $subject, $matches)) {
+                $this->addCapturedParametersToRequest($request, $matches);
                 return $routeAction;
             }
         }
         throw new Exception("Router could not find an appropriate handler.");
+    }
+
+    /**
+     * @param \Http\Request $request
+     * @param $matches
+     */
+    private function addCapturedParametersToRequest(Http\Request $request, $matches): void
+    {
+        foreach ($matches as $key => $paramValue) {
+            if ($key === 0) {
+                continue;
+            }
+            $request->addParameter('param' . $key, $paramValue);
+        }
     }
 }

@@ -18,6 +18,7 @@ Once all containers are up and running, you can proceed to the next step.
 
 ##### Install php dependencies
 Composer will just install `phpunit` and generate our `autoload` script.
+**No** Framework or libraries are used.
 
 ```
 docker exec -it metro-guestbook_php bash -c "composer install"
@@ -41,6 +42,18 @@ docker exec -it metro-guestbook_php bash -c "vendor/bin/phpunit"
 
 #### Application DEMO
 Application is accessible on http://localhost:8001
+
+#### Code design
+This source code reflects my oun perspective of **clean code**, bellow a list of the most important criteria:
+
+- Covered with unit-tests
+- Single responsibility principle.
+- Dependency injection.
+- Composition over inheritance.
+- Depend on interface instead of implementation (when it's appropriate)
+- Clear methods contracts : Do not use associative arrays to pass data around, Use objects.
+
+
 
 
 

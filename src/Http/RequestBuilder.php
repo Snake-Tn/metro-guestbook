@@ -22,7 +22,7 @@ class RequestBuilder
             ->setParameters($parameters)
             ->setMethod($_SERVER['REQUEST_METHOD'])
             ->setBody(file_get_contents('php://input'))
-            ->setHeaders($this->collectHeaders());
+            ->setHeaders($this->getAllHeaders());
 
 
         return $request;
@@ -36,6 +36,7 @@ class RequestBuilder
                 $headers[str_replace(' ', '', ucwords(str_replace('_', ' ', strtolower(substr($key, 5)))))] = $value;
             }
         }
+        return $headers;
     }
 
 }

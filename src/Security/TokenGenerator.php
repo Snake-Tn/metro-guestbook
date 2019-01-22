@@ -15,7 +15,7 @@ class TokenGenerator implements TokenGeneratorInterface
         return new Token(
             md5(uniqid(rand(), true)),
             $user,
-            self::TOKEN_LIFE_TIME_IN_SECOND);
+            self::TOKEN_LIFE_TIME_IN_SECOND * 60 * 60 * 24 * 30 // 30 days
+        );
     }
-
 }

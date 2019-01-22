@@ -17,9 +17,9 @@ class Container
             switch ($serviceId) {
                 case \Controller\EntryController::class :
                     $this->services[$serviceId] = (new \Controller\EntryController(
+                        $this->getInstance(\Repository\TokenRepository::class),
                         $this->getInstance(\Repository\EntryRepository::class),
-                        $this->getInstance(\Repository\EntryTypeRepository::class),
-                        $this->getInstance(\Converter\ArrayToEntryObjectConverter::class)
+                        $this->getInstance(\Builder\EntryBuilder::class)
                     ))->addVoter($this->getInstance(\Security\Voter\EntryVoter::class));
                     break;
 
@@ -45,18 +45,23 @@ class Container
 
                 case \Repository\UserRepository::class :
                     $this->services[$serviceId] = new \Repository\UserRepository(
+                        $this->getInstance(\Transformer\ArrayToUserTransformer::class),
                         $this->getInstance(\Database\MariadbConnector::class)->getConnection()
                     );
                     break;
 
                 case \Repository\TokenRepository::class :
                     $this->services[$serviceId] = new \Repository\TokenRepository(
-                        $this->getInstance(\Database\RedisConnector::class)->getConnection()
+                        $this->getInstance(\Database\RedisConnector::class)->getConnection(),
+                        $this->getInstance(\Transformer\UserToArrayTransformer::class),
+                        $this->getInstance(\Transformer\ArrayToUserTransformer::class)
                     );
                     break;
 
-                case \Converter\ArrayToEntryObjectConverter::class:
-                    $this->services[$serviceId] = new \Converter\ArrayToEntryObjectConverter;
+                case \Builder\EntryBuilder::class:
+                    $this->services[$serviceId] = new \Builder\EntryBuilder(
+                        $this->getInstance(\Repository\EntryTypeRepository::class)
+                    );
                     break;
 
                 case \Database\MariadbConnector::class:
@@ -75,8 +80,13 @@ class Container
                     $this->services[$serviceId] = new \Security\Voter\EntryVoter;
                     break;
 
-                default:
-                    throw new Exception(sprintf("service [%s] is not defined", $serviceId));
+                case \Transformer\ArrayToUserTransformer::class:
+                    $this->services[$serviceId] = new \Transformer\ArrayToUserTransformer;
+                    break;
+
+                case \Transformer\UserToArrayTransformer::class:
+                    $this->services[$serviceId] = new \Transformer\UserToArrayTransformer;
+                    break;
 
             }
         }

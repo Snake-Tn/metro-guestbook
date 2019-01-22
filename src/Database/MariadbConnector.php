@@ -13,6 +13,7 @@ class MariadbConnector
     {
         if (!isset(self::$connection)) {
             self::$connection = new \PDO('mysql:host=mariadb;dbname=guestbook', 'root', 'root');
+            self::$connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         }
         return self::$connection;
     }

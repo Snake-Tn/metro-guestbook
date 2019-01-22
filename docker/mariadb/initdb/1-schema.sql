@@ -3,9 +3,8 @@
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `guestbook`.`user_role` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `code` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `code_UNIQUE` (`code` ASC) )
+  `code` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
@@ -13,7 +12,7 @@ ENGINE = InnoDB;
 -- Table `guestbook`.`user`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `guestbook`.`user` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `login` VARCHAR(45) NOT NULL,
   `password_hash` VARCHAR(300) NOT NULL,
   `role_id` INT NOT NULL,
@@ -32,7 +31,7 @@ ENGINE = InnoDB;
 -- Table `guestbook`.`entry_type`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `guestbook`.`entry_type` (
-  `id` INT UNSIGNED NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `code` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `code_UNIQUE` (`code` ASC) )
@@ -43,14 +42,14 @@ ENGINE = InnoDB;
 -- Table `guestbook`.`entry`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `guestbook`.`entry` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `content` VARCHAR(45) NULL,
-  `is_approved` VARCHAR(45) NULL,
-  `owner_id` INT NOT NULL,
-  `approver_id` INT NOT NULL,
-  `entry_type_id` INT UNSIGNED NOT NULL,
-  `updated_at` DATETIME NULL,
   `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  `is_approved` VARCHAR(45) NULL DEFAULT 0,
+  `owner_id` INT NOT NULL,
+  `approver_id` INT NULL DEFAULT NULL,
+  `entry_type_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_note_user_idx` (`owner_id` ASC) ,
   INDEX `fk_entry_user1_idx` (`approver_id` ASC) ,
@@ -71,20 +70,4 @@ CREATE TABLE IF NOT EXISTS `guestbook`.`entry` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-
-INSERT INTO `guestbook`.`entry_type` (`id`,`code`)
-  VALUES
-    (1,"text"),
-    (2,"image");
-
-INSERT INTO `guestbook`.`user_role` (`id`,`code`)
-  VALUES
-    (1,"admin"),
-    (2,"guest");
-
-INSERT INTO `guestbook`.`user` (`id`, `login`, `password_hash`, `role_id`)
-  VALUES
-    (1, 'admin1', '$2y$10$KaHIZI/jDGLZEPe82eygjuj5BLKFpoqSm6XxkkTAJbCOF6MQ46L1u', 1),
-    (2, 'guest1', '$2y$10$1P03ib7lI4Dx.9C/BwAVx./8hGovdtEjOxTGDc418kg0tyiWj3poO', 2);
 

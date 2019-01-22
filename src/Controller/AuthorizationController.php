@@ -8,7 +8,6 @@
 
 namespace Controller;
 
-
 use Exception\ForbiddenException;
 use Exception\NotFoundException;
 use Http\Request;
@@ -18,12 +17,11 @@ use Repository\UserRepository;
 use Security\TokenGeneratorInterface;
 use Entity\User;
 
-class AuthorizationController
+class AuthorizationController extends AbstractController
 {
 
     private $userRepository;
     private $tokenGenerator;
-    private $tokenRepository;
 
     public function __construct(
         UserRepository $userRepository,
@@ -33,7 +31,7 @@ class AuthorizationController
     {
         $this->userRepository = $userRepository;
         $this->tokenGenerator = $tokenGenerator;
-        $this->tokenRepository = $tokenRepository;
+        parent::__construct($tokenRepository);
     }
 
 
@@ -47,7 +45,7 @@ class AuthorizationController
         $this->tokenRepository->persist($token);
 
         return new Response(json_encode([
-            'access_token' => $token->getToken(),
+            'access_token' => $token->getTokenKey(),
             'expires_in' => $token->getExpiresIn()
         ]), Response::JSON_CONTENT_TYPE, Response::OK);
 
@@ -58,9 +56,8 @@ class AuthorizationController
      * @param $actualPasswordHash
      * @throws ForbiddenException
      */
-    private function checkPasswordsMatches($givenPassword, $actualPasswordHash): void
+    private function checkPasswordsMatches(string $givenPassword, string $actualPasswordHash): void
     {
-
         $passwordsMatches = password_verify($givenPassword, $actualPasswordHash);
 
         if (!$passwordsMatches) {

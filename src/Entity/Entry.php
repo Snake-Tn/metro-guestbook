@@ -10,6 +10,10 @@ namespace Entity;
 class Entry
 {
     /**
+     * @var string
+     */
+    private $id;
+    /**
      * @var EntryType
      */
     private $type;
@@ -35,19 +39,80 @@ class Entry
     private $createdAt;
 
     /**
-     * @var /DateTime
+     * @var \DateTime
      */
     private $updatedAt;
 
     /**
      * Entry constructor.
-     * @param string $type
+     * @param null|string $id
+     * @param EntryType $type
      * @param string $content
      * @param User $owner
      */
-    public function __construct(string $type, string $content, User $owner)
+    public function __construct(?string $id, EntryType $type, string $content, User $owner)
     {
+        $this->id = $id;
+        $this->type = $type;
         $this->content = $content;
+        $this->owner = $owner;
     }
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return EntryType
+     */
+    public function getType(): EntryType
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @return User
+     */
+    public function getOwner(): User
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @return User
+     */
+    public function getApprover(): User
+    {
+        return $this->approver;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
 
 }

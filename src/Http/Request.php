@@ -89,6 +89,17 @@ class Request
     }
 
     /**
+     * @param string $key
+     * @param string $value
+     * @return Request
+     */
+    public function addParameter(string $key, string $value): Request
+    {
+        $this->parameters[$key] = $value;
+        return $this;
+    }
+
+    /**
      * @param array $headers
      * @return Request
      */
@@ -145,7 +156,7 @@ class Request
      * @param $headerKey
      * @return bool
      */
-    public function getHeader($headerKey): bool
+    public function getHeader($headerKey): string
     {
         if (!isset($this->headers[$headerKey])) {
             throw new BadRequestException(sprintf("Header [%s] is missing.", $headerKey));

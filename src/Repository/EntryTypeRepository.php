@@ -23,7 +23,7 @@ class EntryTypeRepository extends AbstractEntityRepository
         $raws = $statement->fetchAll();
     }
 
-    public function fetchByType($code): EntryType
+    public function fetchByCode($code): EntryType
     {
         $statement = $this->getConnection()->prepare(
             "SELECT id, code FROM `entry_type` WHERE code=:code"
@@ -35,7 +35,7 @@ class EntryTypeRepository extends AbstractEntityRepository
             throw new \Exception(sprintf("entry type having [code=%s] not found", $code));
         }
 
-        return new EntryType($raw['id'], $raw['type']);
+        return new EntryType($raw['id'], $raw['code']);
     }
 
 
