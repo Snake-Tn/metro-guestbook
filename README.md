@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/Snake-Tn/metro-guestbook.svg?token=pd8qknJ7Y5UQZCgWZaQx&branch=master)](https://travis-ci.com/Snake-Tn/metro-guestbook)
+
 ### Install
 This manual assumes that docker (`v>17`) and docker-compose (`v.3`) are both installed on your host machine.
 
