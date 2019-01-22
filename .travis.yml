@@ -4,4 +4,4 @@ php:
 install:
   - composer install
 script:
-  - bin/phpunit tests
+  - vendor/bin/phpunit tests
