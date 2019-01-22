@@ -4,6 +4,8 @@
  * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
  */
 
+declare(strict_types=1);
+
 namespace Entity;
 
 class UserRole
@@ -22,7 +24,7 @@ class UserRole
      * @param string $id
      * @param string $code
      */
-    public function __construct(string $id, string $code)
+    public function __construct(?string $id, string $code)
     {
         $this->id = $id;
         $this->code = $code;

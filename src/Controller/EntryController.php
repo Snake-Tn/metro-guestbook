@@ -9,8 +9,6 @@ declare(strict_types=1);
 namespace Controller;
 
 use Builder\EntryBuilder;
-use Transformer\ArrayToEntryTransformer;
-use Transformer\ConverterInterface;
 use Http\Request;
 use Http\Response;
 use Repository\EntryRepository;
@@ -18,7 +16,9 @@ use Repository\TokenRepository;
 
 class EntryController extends AbstractController
 {
+    private $entryRepository;
     private $entryBuilder;
+
 
     public function __construct(
         TokenRepository $tokenRepository,
@@ -31,7 +31,13 @@ class EntryController extends AbstractController
         parent::__construct($tokenRepository);
     }
 
-
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws \Exception\BadRequestException
+     * @throws \Exception\ForbiddenException
+     * @throws \Exception\NotFoundException
+     */
     public function create(Request $request): Response
     {
         $this->denyAccessUnlessGranted($request, 'create_entry');
@@ -48,26 +54,66 @@ class EntryController extends AbstractController
         return new Response('', Response::JSON_CONTENT_TYPE, Response::OK);
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws \Exception\BadRequestException
+     * @throws \Exception\ForbiddenException
+     * @throws \Exception\NotFoundException
+     */
     public function approve(Request $request): Response
     {
+        $this->denyAccessUnlessGranted($request, 'approve_entry');
         $entry = $this->entryRepository->fetchById($request->get('param1'));
-        $this->denyAccessUnlessGranted('approve_entry');
+        $entry->setApprover($this->getToken($request)->getUser());
+        $this->entryRepository->persist($entry);
 
-
+        return new Response('', Response::JSON_CONTENT_TYPE, Response::OK);
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws \Exception\BadRequestException
+     * @throws \Exception\ForbiddenException
+     * @throws \Exception\NotFoundException
+     */
     public function update(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('update_entry');
+        $entry = $this->entryRepository->fetchById($request->get('param1'));
+        $this->denyAccessUnlessGranted($request, 'update_entry', $entry);
+
+        $entryAsArray = json_decode($request->getBody(), true);
+        $entry->setContent($entryAsArray['content']);
+
+        $this->entryRepository->persist($entry);
+        return new Response('', Response::JSON_CONTENT_TYPE, Response::OK);
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws \Exception\BadRequestException
+     * @throws \Exception\ForbiddenException
+     * @throws \Exception\NotFoundException
+     */
     public function delete(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('delete_entry');
+        $entry = $this->entryRepository->fetchById($request->get('param1'));
+        $this->denyAccessUnlessGranted($request, 'delete_entry', $entry);
+
+        $this->entryRepository->remove($entry);
+        return new Response('', Response::JSON_CONTENT_TYPE, Response::OK);
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws \Exception\ForbiddenException
+     */
     public function show(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('show_entry');
+        $this->denyAccessUnlessGranted($request, 'show_entry');
+        return new Response('', Response::JSON_CONTENT_TYPE, Response::OK);
     }
 }

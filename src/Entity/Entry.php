@@ -4,6 +4,8 @@
  * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
  */
 
+declare(strict_types=1);
+
 namespace Entity;
 
 
@@ -56,12 +58,13 @@ class Entry
         $this->type = $type;
         $this->content = $content;
         $this->owner = $owner;
+        $this->approver = new NullUser();
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -112,6 +115,22 @@ class Entry
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @param User $approver
+     */
+    public function setApprover(User $approver): void
+    {
+        $this->approver = $approver;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent(string $content): void
+    {
+        $this->content = $content;
     }
 
 

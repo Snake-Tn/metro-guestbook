@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: a.kooli
- * Date: 19.01.19
- * Time: 17:06
+ * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
  */
 
-namespace Exception;
+declare(strict_types=1);
 
+namespace Exception;
 
 class ForbiddenException extends \Exception
 {

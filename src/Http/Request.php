@@ -154,9 +154,10 @@ class Request
 
     /**
      * @param $headerKey
-     * @return bool
+     * @return string
+     * @throws BadRequestException
      */
-    public function getHeader($headerKey): string
+    public function getHeader(string $headerKey): string
     {
         if (!isset($this->headers[$headerKey])) {
             throw new BadRequestException(sprintf("Header [%s] is missing.", $headerKey));

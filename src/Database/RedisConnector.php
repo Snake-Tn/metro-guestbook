@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: a.kooli
- * Date: 19.01.19
- * Time: 17:48
+ * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
  */
 
-namespace Database;
+declare(strict_types=1);
 
+namespace Database;
 
 class RedisConnector
 {
@@ -16,7 +15,7 @@ class RedisConnector
      */
     static private $connection;
 
-    public function getConnection()
+    public function getConnection(): \Redis
     {
         if (!isset(self::$connection)) {
             $redis = new \Redis();

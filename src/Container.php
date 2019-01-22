@@ -33,6 +33,8 @@ class Container
 
                 case \Repository\EntryRepository::class :
                     $this->services[$serviceId] = new \Repository\EntryRepository(
+                        $this->getInstance(\Repository\UserRepository::class),
+                        $this->getInstance(\Repository\EntryTypeRepository::class),
                         $this->getInstance(\Database\MariadbConnector::class)->getConnection()
                     );
                     break;

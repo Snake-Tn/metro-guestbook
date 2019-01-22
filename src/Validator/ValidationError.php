@@ -1,10 +1,10 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: a.kooli
- * Date: 21.01.19
- * Time: 22:06
+ * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
  */
+
+declare(strict_types=1);
 
 namespace Validator;
 

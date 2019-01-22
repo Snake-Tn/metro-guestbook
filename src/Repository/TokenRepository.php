@@ -1,7 +1,12 @@
 <?php
 
-namespace Repository;
+/**
+ * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
+ */
 
+declare(strict_types=1);
+
+namespace Repository;
 
 use Exception\NotFoundException;
 use Security\Token;
@@ -32,7 +37,12 @@ class TokenRepository
         $this->connection->set($token->getTokenKey(), json_encode($userAsArray), $token->getExpiresIn());
     }
 
-    public function fetchByKey($tokenKey): Token
+    /**
+     * @param string $tokenKey
+     * @return Token
+     * @throws NotFoundException
+     */
+    public function fetchByKey(string $tokenKey): Token
     {
         $encodedUser = $this->connection->get($tokenKey);
         if (empty($encodedUser)) {

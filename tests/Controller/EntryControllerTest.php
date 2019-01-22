@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Tests\Controller;
 
+use Builder\EntryBuilder;
 use Controller\Api\GuestNoteController;
 use Controller\EntryController;
 use Exception\NotFoundException;
@@ -28,7 +29,11 @@ class EntryControllerTest extends TestCase
     function test_create_case_request_missing_token()
     {
         $this->expectException(ForbiddenException::class);
-        $controller = new EntryController($this->createMock(TokenRepository::class));
+        $controller = new EntryController(
+            $this->createMock(TokenRepository::class),
+            $this->createMock(EntryRepository::class),
+            $this->createMock(EntryBuilder::class)
+        );
         $request = new Request();
         $controller->create($request);
     }
@@ -41,7 +46,11 @@ class EntryControllerTest extends TestCase
             ->with('some_unkown_token')
             ->willThrowException(new NotFoundException());
 
-        $controller = new EntryController($tokenRepositoryMock);
+        $controller = new EntryController(
+            $tokenRepositoryMock,
+            $this->createMock(EntryRepository::class),
+            $this->createMock(EntryBuilder::class)
+        );
         $request = new Request();
         $request->setHeaders(['Authorization' => 'Bearer some_unkown_token']);
         $controller->create($request);

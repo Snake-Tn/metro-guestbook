@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: a.kooli
- * Date: 19.01.19
- * Time: 12:32
+ * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
  */
 
-namespace Entity;
+declare(strict_types=1);
 
+namespace Entity;
 
 class EntryType
 {
@@ -25,7 +24,7 @@ class EntryType
      * @param string $id
      * @param string $code
      */
-    public function __construct(string $id, string $code)
+    public function __construct(?string $id, string $code)
     {
         $this->id = $id;
         $this->code = $code;

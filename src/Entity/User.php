@@ -4,8 +4,9 @@
  * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
  */
 
-namespace Entity;
+declare(strict_types=1);
 
+namespace Entity;
 
 class User
 {
@@ -35,7 +36,7 @@ class User
      * @param string $passwordHash
      * @param UserRole $role
      */
-    public function __construct(string $id, string $login, string $passwordHash, UserRole $role)
+    public function __construct(?string $id, string $login, string $passwordHash, UserRole $role)
     {
         $this->id = $id;
         $this->login = $login;
@@ -46,7 +47,7 @@ class User
     /**
      * @return string
      */
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -74,7 +75,6 @@ class User
     {
         return $this->role;
     }
-
 
 
 }

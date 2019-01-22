@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: a.kooli
- * Date: 21.01.19
- * Time: 19:29
+ * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
  */
 
-namespace Transformer;
+declare(strict_types=1);
 
+namespace Transformer;
 
 use Entity\User;
 use Entity\UserRole;

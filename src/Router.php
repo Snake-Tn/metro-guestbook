@@ -15,6 +15,9 @@ class Router
     const CONFIGURATION_MAP = [
         'POST/api/entries' => ['controller' => EntryController::class, 'method' => 'create'],
         'POST/api/entries/([1-9]+)/is_approved' => ['controller' => EntryController::class, 'method' => 'approve'],
+        'PUT/api/entries/([1-9]+)' => ['controller' => EntryController::class, 'method' => 'update'],
+        'DELETE/api/entries/([1-9]+)' => ['controller' => EntryController::class, 'method' => 'delete'],
+        'GET/api/entries' => ['controller' => EntryController::class, 'method' => 'show'],
         'POST/api/auth' => ['controller' => AuthorizationController::class, 'method' => 'login'],
 
     ];
@@ -25,6 +28,10 @@ class Router
         $this->container = $container;
     }
 
+    /**
+     * @param \Http\Request $request
+     * @return \Http\Response
+     */
     public function route(Http\Request $request): Http\Response
     {
         try {
@@ -41,8 +48,12 @@ class Router
         }
     }
 
-
-    private function resolve(Http\Request $request): array
+    /**
+     * @param \Http\Request $request
+     * @return string
+     * @throws Exception
+     */
+    private function resolve(Http\Request $request): string
     {
         foreach (self::CONFIGURATION_MAP as $routeCondition => $routeAction) {
             $pattern = '/^' . str_replace('/', '\\/', $routeCondition) . '$/';

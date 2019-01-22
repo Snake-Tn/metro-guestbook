@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: a.kooli
- * Date: 19.01.19
- * Time: 20:42
+ * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
  */
 
-namespace Controller;
+declare(strict_types=1);
 
+namespace Controller;
 
 use Exception\BadRequestException;
 use Exception\ForbiddenException;
@@ -32,6 +31,12 @@ abstract class AbstractController
         $this->tokenRepository = $tokenRepository;
     }
 
+    /**
+     * @param Request $request
+     * @param string $action
+     * @param null $subject
+     * @throws ForbiddenException
+     */
     protected function denyAccessUnlessGranted(Request $request, string $action, $subject = null)
     {
         try {

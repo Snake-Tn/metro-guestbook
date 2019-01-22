@@ -7,6 +7,7 @@
 declare(strict_types=1);
 
 namespace Exception;
+
 class NotFoundException extends \Exception
 {
 }

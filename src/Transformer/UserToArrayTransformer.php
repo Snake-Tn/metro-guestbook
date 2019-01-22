@@ -1,19 +1,17 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: a.kooli
- * Date: 21.01.19
- * Time: 19:23
+ * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
  */
 
-namespace Transformer;
+declare(strict_types=1);
 
+namespace Transformer;
 
 use Entity\User;
 
 class UserToArrayTransformer
 {
-
     public function transform(User $user): array
     {
         return [

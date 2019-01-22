@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `guestbook`.`user_role` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `code` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+  ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -20,11 +20,11 @@ CREATE TABLE IF NOT EXISTS `guestbook`.`user` (
   UNIQUE INDEX `login_UNIQUE` (`login` ASC) ,
   INDEX `fk_user_role1_idx` (`role_id` ASC) ,
   CONSTRAINT `fk_user_role1`
-    FOREIGN KEY (`role_id`)
-    REFERENCES `guestbook`.`user_role` (`id`)
+  FOREIGN KEY (`role_id`)
+  REFERENCES `guestbook`.`user_role` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `guestbook`.`entry_type` (
   `code` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `code_UNIQUE` (`code` ASC) )
-ENGINE = InnoDB;
+  ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -46,7 +46,6 @@ CREATE TABLE IF NOT EXISTS `guestbook`.`entry` (
   `content` VARCHAR(45) NULL,
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
-  `is_approved` VARCHAR(45) NULL DEFAULT 0,
   `owner_id` INT NOT NULL,
   `approver_id` INT NULL DEFAULT NULL,
   `entry_type_id` INT NOT NULL,
@@ -55,19 +54,18 @@ CREATE TABLE IF NOT EXISTS `guestbook`.`entry` (
   INDEX `fk_entry_user1_idx` (`approver_id` ASC) ,
   INDEX `fk_entry_entry_type1_idx` (`entry_type_id` ASC) ,
   CONSTRAINT `fk_note_user`
-    FOREIGN KEY (`owner_id`)
-    REFERENCES `guestbook`.`user` (`id`)
+  FOREIGN KEY (`owner_id`)
+  REFERENCES `guestbook`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_entry_user1`
-    FOREIGN KEY (`approver_id`)
-    REFERENCES `guestbook`.`user` (`id`)
+  FOREIGN KEY (`approver_id`)
+  REFERENCES `guestbook`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_entry_entry_type1`
-    FOREIGN KEY (`entry_type_id`)
-    REFERENCES `guestbook`.`entry_type` (`id`)
+  FOREIGN KEY (`entry_type_id`)
+  REFERENCES `guestbook`.`entry_type` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
+  ENGINE = InnoDB;

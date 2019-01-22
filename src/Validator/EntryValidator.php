@@ -1,23 +1,18 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: a.kooli
- * Date: 21.01.19
- * Time: 22:05
+ * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
  */
 
-namespace Validator;
+declare(strict_types=1);
 
+namespace Validator;
 
 class EntryValidator implements ValidatorInterface
 {
     public function validate(array $entry): array
     {
-
         return [];
-
-
     }
-
 
 }

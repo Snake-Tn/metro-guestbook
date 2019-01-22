@@ -1,10 +1,10 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: a.kooli
- * Date: 19.01.19
- * Time: 14:31
+ * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
  */
+
+declare(strict_types=1);
 
 namespace Controller;
 
@@ -34,7 +34,12 @@ class AuthorizationController extends AbstractController
         parent::__construct($tokenRepository);
     }
 
-
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws ForbiddenException
+     * @throws \Exception\BadRequestException
+     */
     public function login(Request $request): Response
     {
         $user = $this->getUser($request->get('login'));

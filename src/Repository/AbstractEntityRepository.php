@@ -1,10 +1,10 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: a.kooli
- * Date: 19.01.19
- * Time: 12:49
+ * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
  */
+
+declare(strict_types=1);
 
 namespace Repository;
 
@@ -18,7 +18,7 @@ abstract class AbstractEntityRepository
         $this->connection = $connection;
     }
 
-    protected function getConnection()
+    protected function getConnection(): \PDO
     {
         return $this->connection;
     }

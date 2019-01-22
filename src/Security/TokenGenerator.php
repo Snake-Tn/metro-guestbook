@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
+ */
+
+declare(strict_types=1);
 
 namespace Security;
 
@@ -13,7 +18,7 @@ class TokenGenerator implements TokenGeneratorInterface
     public function generate(User $user): Token
     {
         return new Token(
-            md5(uniqid(rand(), true)),
+            md5(uniqid((string)rand(), true)),
             $user,
             self::TOKEN_LIFE_TIME_IN_SECOND * 60 * 60 * 24 * 30 // 30 days
         );

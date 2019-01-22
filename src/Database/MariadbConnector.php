@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
+ */
+
 namespace Database;
 
 class MariadbConnector
