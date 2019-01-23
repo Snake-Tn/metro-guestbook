@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/Snake-Tn/metro-guestbook.svg?token=pd8qknJ7Y5UQZCgWZaQx&branch=master)](https://travis-ci.com/Snake-Tn/metro-guestbook)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Snake-Tn/metro-guestbook/badges/quality-score.png?b=master&s=05f3f61e1a4506ce510df380cdc9d8ee40603dd5)](https://scrutinizer-ci.com/g/Snake-Tn/metro-guestbook/?branch=master)
 
 ### Install
 This manual assumes that docker (`v>17`) and docker-compose (`v.3`) are both installed on your host machine.
@@ -15,11 +16,12 @@ cd metro-guestbook
 ```bash
 docker-compose up
 ```
-Docker compose will create 4 containers, `php-fpm` and `ngnix`. 
+Docker compose will create 4 containers, `php` , `ngnix` , `mariadb` and `redis`. 
 Once all containers are up and running, you can proceed to the next step.
 
 ##### Install php dependencies
 Composer will just install `phpunit` and generate our `autoload` script.
+
 **No** Framework or libraries are used.
 
 ```

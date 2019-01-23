@@ -34,7 +34,7 @@ abstract class AbstractController
     /**
      * @param Request $request
      * @param string $action
-     * @param null $subject
+     * @param mixed $subject
      * @throws ForbiddenException
      */
     protected function denyAccessUnlessGranted(Request $request, string $action, $subject = null)
