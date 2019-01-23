@@ -8,10 +8,16 @@ declare(strict_types=1);
 
 class Container
 {
+    /**
+     * @var array
+     */
     private $services;
 
-
-    public function getInstance($serviceId)
+    /**
+     * @param string $serviceId
+     * @return mixed
+     */
+    public function getInstance(string $serviceId)
     {
         if (!isset($this->services[$serviceId])) {
             switch ($serviceId) {

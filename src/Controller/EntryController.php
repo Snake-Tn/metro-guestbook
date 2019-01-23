@@ -51,7 +51,7 @@ class EntryController extends AbstractController
 
         $this->entryRepository->persist($entry);
 
-        return new Response('', Response::JSON_CONTENT_TYPE, Response::OK);
+        return new Response('', Response::JSON_CONTENT_TYPE, Response::CREATED);
     }
 
     /**

@@ -15,8 +15,15 @@ use Transformer\ArrayToUserTransformer;
 
 class UserRepository extends AbstractEntityRepository
 {
+    /**
+     * @var ArrayToUserTransformer
+     */
     private $arrayToUserTransformer;
 
+    /**
+     * @param ArrayToUserTransformer $arrayToUserTransformer
+     * @param \PDO $connection
+     */
     public function __construct(
         ArrayToUserTransformer $arrayToUserTransformer,
         \PDO $connection
@@ -67,6 +74,4 @@ class UserRepository extends AbstractEntityRepository
         }
         return $this->arrayToUserTransformer->transform($raw);
     }
-
-
 }

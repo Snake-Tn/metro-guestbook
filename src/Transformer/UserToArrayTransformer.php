@@ -12,6 +12,10 @@ use Entity\User;
 
 class UserToArrayTransformer
 {
+    /**
+     * @param User $user
+     * @return array
+     */
     public function transform(User $user): array
     {
         return [
@@ -22,5 +26,4 @@ class UserToArrayTransformer
             'role_code' => $user->getRole()->getCode()
         ];
     }
-
 }

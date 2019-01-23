@@ -10,6 +10,7 @@ namespace Http;
 class Response
 {
     const OK = 200;
+    const CREATED = 201;
     const BAD_REQUEST = 400;
     const INVALID_USERNAME_OR_PASSWORD = 403;
     const NOT_FOUND = 404;
@@ -28,5 +29,4 @@ class Response
         $this->contentType = $contentType;
         $this->code = $code;
     }
-
 }

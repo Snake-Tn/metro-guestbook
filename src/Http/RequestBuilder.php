@@ -8,7 +8,6 @@ namespace Http;
 
 class RequestBuilder
 {
-
     public function build()
     {
         $request = new Request();
@@ -25,6 +24,7 @@ class RequestBuilder
         return $request;
     }
 
+
     private function getAllHeaders()
     {
         $headers = array();
@@ -35,5 +35,4 @@ class RequestBuilder
         }
         return $headers;
     }
-
 }

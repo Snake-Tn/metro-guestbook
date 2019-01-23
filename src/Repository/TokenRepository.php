@@ -15,11 +15,26 @@ use Transformer\UserToArrayTransformer;
 
 class TokenRepository
 {
+    /**
+     * @var \Redis
+     */
     private $connection;
 
+    /**
+     * @var UserToArrayTransformer
+     */
     private $userToArrayTransformer;
+
+    /**
+     * @var ArrayToUserTransformer
+     */
     private $arrayToUserTransformer;
 
+    /**
+     * @param \Redis $connection
+     * @param UserToArrayTransformer $userToArrayTransformer
+     * @param ArrayToUserTransformer $arrayToUserTransformer
+     */
     public function __construct(
         \Redis $connection,
         UserToArrayTransformer $userToArrayTransformer,
@@ -31,6 +46,9 @@ class TokenRepository
         $this->arrayToUserTransformer = $arrayToUserTransformer;
     }
 
+    /**
+     * @param Token $token
+     */
     public function persist(Token $token): void
     {
         $userAsArray = $this->userToArrayTransformer->transform($token->getUser());

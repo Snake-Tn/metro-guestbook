@@ -8,16 +8,27 @@ declare(strict_types=1);
 
 namespace Repository;
 
-
 use Entity\Entry;
 use Exception\NotFoundException;
 
 class EntryRepository extends AbstractEntityRepository
 {
 
+    /**
+     * @var UserRepository
+     */
     private $userRepository;
+
+    /**
+     * @var EntryTypeRepository
+     */
     private $entryTypeRepository;
 
+    /**
+     * @param UserRepository $userRepository
+     * @param EntryTypeRepository $entryTypeRepository
+     * @param \PDO $connection
+     */
     public function __construct(
         UserRepository $userRepository,
         EntryTypeRepository $entryTypeRepository,
@@ -84,11 +95,13 @@ class EntryRepository extends AbstractEntityRepository
         $statement->execute();
     }
 
+    /**
+     * @param Entry $entry
+     */
     public function remove(Entry $entry):void
     {
         $statement = $this->getConnection()->prepare("DELETE FROM entry where id=:id");
         $statement->bindValue("id", $entry->getId());
         $statement->execute();
     }
-
 }

@@ -13,6 +13,10 @@ use Entity\UserRole;
 
 class ArrayToUserTransformer
 {
+    /**
+     * @param array $userAsArray
+     * @return User
+     */
     public function transform(array $userAsArray): user
     {
         return new User($userAsArray['id'], $userAsArray['login'], $userAsArray['password_hash'], new UserRole($userAsArray['role_id'], $userAsArray['role_code']));

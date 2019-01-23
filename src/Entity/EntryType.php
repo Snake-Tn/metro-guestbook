@@ -46,5 +46,4 @@ class EntryType
         return $this->code;
     }
 
-
 }

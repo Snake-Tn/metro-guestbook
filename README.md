@@ -4,7 +4,7 @@
 ## How to install
 This manual assumes that docker (`v>17`) and docker-compose (`v.3`) are both installed on your host machine.
 
-Once you finish all the instructions, the application will be available on http://localhost:8001
+Once you finish bellow instructions, the application will be available on http://localhost:8001
  
 ##### download source code and cd to the root of the repo.
 ```bash
@@ -22,7 +22,7 @@ Once all containers are up and running, you can proceed to the next step.
 ##### Install php dependencies
 Composer will just install `phpunit` and generate our `autoload` script.
 
-**No** Framework or libraries are used.
+**No Framework or libraries** are going to be installed.
 
 ```
 docker exec -it metro-guestbook_php bash -c "composer install"

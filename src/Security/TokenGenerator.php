@@ -13,8 +13,13 @@ use Entity\User;
 
 class TokenGenerator implements TokenGeneratorInterface
 {
+
     const TOKEN_LIFE_TIME_IN_SECOND = 3600;
 
+    /**
+     * @param User $user
+     * @return Token
+     */
     public function generate(User $user): Token
     {
         return new Token(

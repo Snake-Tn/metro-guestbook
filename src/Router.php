@@ -21,8 +21,15 @@ class Router
         'POST/api/auth' => ['controller' => AuthorizationController::class, 'method' => 'login'],
 
     ];
+
+    /**
+     * @var Container
+     */
     private $container;
 
+    /**
+     * @param Container $container
+     */
     public function __construct(Container $container)
     {
         $this->container = $container;

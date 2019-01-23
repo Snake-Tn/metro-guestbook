@@ -10,6 +10,10 @@ namespace Validator;
 
 class EntryValidator implements ValidatorInterface
 {
+    /**
+     * @param array $entry
+     * @return ValidationError[]
+     */
     public function validate(array $entry): array
     {
         return [];

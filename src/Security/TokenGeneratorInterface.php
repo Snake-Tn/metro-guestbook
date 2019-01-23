@@ -14,6 +14,10 @@ use Entity\User;
 interface TokenGeneratorInterface
 {
 
+    /**
+     * @param User $user
+     * @return Token
+     */
     public function generate(User $user): Token;
 
 }

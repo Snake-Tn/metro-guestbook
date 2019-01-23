@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Repository;
 
-
 use Entity\EntryType;
 use Exception\NotFoundException;
 
@@ -64,6 +63,4 @@ class EntryTypeRepository extends AbstractEntityRepository
 
         return new EntryType($raw['id'], $raw['code']);
     }
-
-
 }
