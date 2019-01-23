@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/Snake-Tn/metro-guestbook.svg?token=pd8qknJ7Y5UQZCgWZaQx&branch=master)](https://travis-ci.com/Snake-Tn/metro-guestbook)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Snake-Tn/metro-guestbook/badges/quality-score.png?b=master&s=05f3f61e1a4506ce510df380cdc9d8ee40603dd5)](https://scrutinizer-ci.com/g/Snake-Tn/metro-guestbook/?branch=master)
 
-### Install
+## How to install
 This manual assumes that docker (`v>17`) and docker-compose (`v.3`) are both installed on your host machine.
 
 Once you finish all the instructions, the application will be available on http://localhost:8001
@@ -47,7 +47,16 @@ docker exec -it metro-guestbook_php bash -c "vendor/bin/phpunit"
 #### Application DEMO
 Application is accessible on http://localhost:8001
 
-#### Code design
+## Architecture
+
+It's a Single Page Application having a frontend running on react and a backend providing a restful api.
+The api is totally decoupled/isolated and it can be used by any client : Browser, Mobile app or another service.
+
+#### Database (MariaDB)
+
+![Database schema](uml/db_design.png? "Database schema")
+
+## Code design
 This source code reflects my oun perspective of **clean code**, bellow a list of the most important criteria:
 
 - Covered with unit-tests
