@@ -1,12 +1,60 @@
-.restaurant-list{
-    padding: 20px 0px;
-
+body {
+    background: ghostwhite;
 }
-.search{
+
+.login-form {
+    height: 100vh;
+}
+
+.create-entry-form {
+    padding: 30px 10px;
+    margin: 10px;
+    background: white;
+    border-radius: 10px;
+    border-color: gray;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.create-entry-form-title {
+    padding: 5px;
+    color: #fff600;
+    background: #003387;
+    font-weight: bold;
+}
+
+.post-entry {
+    margin-bottom: 20px;
+}
+
+.create-entry-form .or {
+    margin: auto;
+    text-decoration: underline;
+    padding: 30px;
+}
+
+.create-entry-form .success-msg {
+    color: green;
+}
+
+.login-form .error {
+    padding-bottom: 10px;
+}
+
+.search {
     max-width: 800px;
 }
-.favourite{
+
+.favourite {
     padding: 0px;
     border-radius: 10%;
     height: 20px;
+}
+.admin-actions .btn{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.admin-actions{
+    margin-bottom: 100px;
 }

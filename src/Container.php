@@ -25,7 +25,9 @@ class Container
                     $this->services[$serviceId] = (new \Controller\EntryController(
                         $this->getInstance(\Repository\TokenRepository::class),
                         $this->getInstance(\Repository\EntryRepository::class),
-                        $this->getInstance(\Builder\EntryBuilder::class)
+                        $this->getInstance(\Builder\EntryBuilder::class),
+                        $this->getInstance(\Transformer\EntryToArrayTransformer::class),
+                        $this->getInstance(\ImageStorage\LocalImageStorage::class)
                     ))->addVoter($this->getInstance(\Security\Voter\EntryVoter::class));
                     break;
 
@@ -43,6 +45,10 @@ class Container
                         $this->getInstance(\Repository\EntryTypeRepository::class),
                         $this->getInstance(\Database\MariadbConnector::class)->getConnection()
                     );
+                    break;
+
+                case \Controller\IndexController::class:
+                    $this->services[$serviceId] = new \Controller\IndexController();
                     break;
 
                 case \Repository\EntryTypeRepository::class :
@@ -96,6 +102,12 @@ class Container
                     $this->services[$serviceId] = new \Transformer\UserToArrayTransformer;
                     break;
 
+                case \Transformer\EntryToArrayTransformer::class:
+                    $this->services[$serviceId] = new \Transformer\EntryToArrayTransformer;
+                    break;
+                case \ImageStorage\LocalImageStorage::class:
+                    $this->services[$serviceId] = new \ImageStorage\LocalImageStorage;
+                    break;
             }
         }
         return $this->services[$serviceId];

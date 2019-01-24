@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `guestbook`.`entry_type` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `guestbook`.`entry` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `content` VARCHAR(45) NULL,
+  `content` TEXT NULL,
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   `owner_id` INT NOT NULL,

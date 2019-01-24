@@ -18,7 +18,8 @@ class RequestBuilder
             ->setParameters($parameters)
             ->setMethod($_SERVER['REQUEST_METHOD'])
             ->setBody(file_get_contents('php://input'))
-            ->setHeaders($this->getAllHeaders());
+            ->setHeaders($this->getAllHeaders())
+            ->setFiles($this->getAllFiles());
 
 
         return $request;
@@ -34,5 +35,13 @@ class RequestBuilder
             }
         }
         return $headers;
+    }
+
+    private function getAllFiles()
+    {
+        if (empty($_FILES)) {
+            return [];
+        }
+        return $_FILES;
     }
 }

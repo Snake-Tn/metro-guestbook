@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 use Controller\EntryController;
 use Controller\AuthorizationController;
+use Controller\IndexController;
 
 class Router
 {
@@ -17,8 +18,11 @@ class Router
         'POST/api/entries/([1-9]+)/is_approved' => ['controller' => EntryController::class, 'method' => 'approve'],
         'PUT/api/entries/([1-9]+)' => ['controller' => EntryController::class, 'method' => 'update'],
         'DELETE/api/entries/([1-9]+)' => ['controller' => EntryController::class, 'method' => 'delete'],
-        'GET/api/entries' => ['controller' => EntryController::class, 'method' => 'show'],
-        'POST/api/auth' => ['controller' => AuthorizationController::class, 'method' => 'login'],
+        'GET/api/entries' => ['controller' => EntryController::class, 'method' => 'list'],
+        'GET/api/auth/token' => ['controller' => AuthorizationController::class, 'method' => 'login'],
+        'GET/' => ['controller' => IndexController::class, 'method' => 'index'],
+        'GET/login' => ['controller' => IndexController::class, 'method' => 'index'],
+        'GET/admin' => ['controller' => IndexController::class, 'method' => 'index'],
 
     ];
 
@@ -60,7 +64,7 @@ class Router
      * @return string
      * @throws Exception
      */
-    private function resolve(Http\Request $request): string
+    private function resolve(Http\Request $request): array
     {
         foreach (self::CONFIGURATION_MAP as $routeCondition => $routeAction) {
             $pattern = '/^' . str_replace('/', '\\/', $routeCondition) . '$/';

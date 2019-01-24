@@ -22,15 +22,15 @@ class EntryVoter implements VoterInterface
     public function vote(Token $token, $subject, string $action): bool
     {
         switch ($action) {
-            case 'create_entry':
-                return true;
             case 'approve_entry':
-                return $this->isAdmin($token);
             case 'update_entry':
             case 'delete_entry':
+            case 'show_all_entries':
+                return $this->isAdmin($token);
+            case 'create_entry':
+            case 'show_approved_entries':
                 /* @var $subject Entry */
-                return $this->isAdmin($token) ||
-                    ($this->isGuest($token) && $subject->getOwner()->getId() === $token->getUser()->getId());
+                return $this->isAdmin($token) || $this->isGuest($token);
             default:
                 return false;
         }
@@ -43,7 +43,7 @@ class EntryVoter implements VoterInterface
      */
     public function supports($subject, string $action): bool
     {
-        return in_array($action, ['create_entry', 'approve_entry', 'update_entry', 'delete_entry']) &&
+        return in_array($action, ['create_entry', 'approve_entry', 'update_entry', 'delete_entry', 'show_approved_entries', 'show_all_entries']) &&
             (is_null($subject) || $subject instanceof Entry);
     }
 

@@ -132,5 +132,10 @@ class Entry
         $this->content = $content;
     }
 
+    public function isApproved():bool
+    {
+        return !$this->approver instanceof NullUser;
+    }
+
 
 }

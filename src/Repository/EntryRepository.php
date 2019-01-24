@@ -41,6 +41,27 @@ class EntryRepository extends AbstractEntityRepository
     }
 
     /**
+     * @return Entry[]
+     * @throws NotFoundException
+     */
+    public function fetchAll(): iterable
+    {
+        /**
+         * fetch all ids, then foreach id fetch the hole entity.
+         * This approach works very well when having a second level cache.
+         * @see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/second-level-cache.html
+         */
+        $statement = $this->getConnection()->prepare("SELECT entry.id FROM entry");
+        $statement->execute();
+        $allIds = $statement->fetchAll(\PDO::FETCH_COLUMN);
+        if ($allIds) {
+            foreach ($allIds as $id) {
+                yield $this->fetchById($id);
+            }
+        }
+    }
+
+    /**
      * @param string $id
      * @return Entry
      * @throws NotFoundException
@@ -64,19 +85,23 @@ class EntryRepository extends AbstractEntityRepository
             throw  new NotFoundException(sprintf("entry having [id=%s] not found", $id));
         }
 
-        return new Entry(
+        $entry = new Entry(
             $raw['id'],
             $this->entryTypeRepository->fetchById($raw['entry_type_id']),
             $raw['content'],
             $this->userRepository->fetchById($raw['owner_id'])
         );
+        if (!empty($raw['approver_id'])) {
+            $entry->setApprover($this->userRepository->fetchById($raw['approver_id']));
+        }
+        return $entry;
     }
 
     /**
      * Update or insert an entry.
      * @param Entry $entry
      */
-    public function persist(Entry $entry):void
+    public function persist(Entry $entry): void
     {
         $statement = $this->getConnection()->prepare("INSERT INTO entry 
          (id,content,owner_id,approver_id,entry_type_id,updated_at,created_at)
@@ -98,7 +123,7 @@ class EntryRepository extends AbstractEntityRepository
     /**
      * @param Entry $entry
      */
-    public function remove(Entry $entry):void
+    public function remove(Entry $entry): void
     {
         $statement = $this->getConnection()->prepare("DELETE FROM entry where id=:id");
         $statement->bindValue("id", $entry->getId());

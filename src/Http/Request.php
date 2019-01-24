@@ -31,6 +31,12 @@ class Request
      * @var array
      */
     private $headers = [];
+
+    /**
+     * @var array
+     */
+    private $files = [];
+
     /**
      * @var string
      */
@@ -164,5 +170,35 @@ class Request
         }
         return $this->headers[$headerKey];
     }
+
+    /**
+     * @param string $fileKey
+     * @return array
+     * @throws BadRequestException
+     */
+    public function getFile(string $fileKey): array
+    {
+        if (!isset($this->files[$fileKey])) {
+            throw new BadRequestException(sprintf("File [%s] is missing.", $fileKey));
+        }
+        return $this->files[$fileKey];
+    }
+
+    /**
+     * @param array $files
+     */
+    public function setFiles(array $files): void
+    {
+        $this->files = $files;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFiles(): bool
+    {
+        return !empty($this->files);
+    }
+
 
 }
