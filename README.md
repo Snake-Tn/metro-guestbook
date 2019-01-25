@@ -7,7 +7,7 @@ The frontend is running on [React](https://reactjs.org/) and consuming a Restful
 The backend has 4 [Docker](https://www.docker.com/) containers: nginx, php-fpm, mariadb and redis.
 Redis is used to store users session.
 
-![app architecture](uml/app_design.svg? "app architecture")
+![app architecture](uml/app_design.png? "app architecture")
 
 #### Database (MariaDB)
 
