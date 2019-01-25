@@ -5,7 +5,7 @@
 
 The frontend is running on [React](https://reactjs.org/) and consuming a Restful API.
 The backend has 4 [Docker](https://www.docker.com/) containers: nginx, php-fpm, mariadb and redis.
-Redis is used to store users session.
+Redis is used to store user's session.
 
 ![app architecture](uml/app_design.png? "app architecture")
 
@@ -13,7 +13,7 @@ Redis is used to store users session.
 
 ![Database schema](uml/db_design.png? "Database schema")
 
-## Code design
+#### Code design
 This source code reflects my oun perspective of **clean code**, bellow a list of the most important criteria:
 
 - Covered with unit-tests
@@ -21,7 +21,9 @@ This source code reflects my oun perspective of **clean code**, bellow a list of
 - Dependency injection.
 - Composition over inheritance.
 - Depend on interface instead of implementation (when it's appropriate)
-- Clear methods contracts : Do not use associative arrays to pass data around, Use objects.
+- Clear method's contract : Do not use associative arrays to pass data around, Use objects.
+- Don't make me think : Avoid using 'clever' solutions, always go for the simplest and most straight forward implementation. 
+
 
 
 
