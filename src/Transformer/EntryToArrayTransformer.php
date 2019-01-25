@@ -21,6 +21,7 @@ class EntryToArrayTransformer
             'id' => $entry->getId(),
             'content' => $entry->getContent(),
             'type' => $entry->getType()->getCode(),
+            'is_approved' => $entry->isApproved()
         ];
     }
 

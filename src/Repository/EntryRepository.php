@@ -51,7 +51,7 @@ class EntryRepository extends AbstractEntityRepository
          * This approach works very well when having a second level cache.
          * @see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/second-level-cache.html
          */
-        $statement = $this->getConnection()->prepare("SELECT entry.id FROM entry");
+        $statement = $this->getConnection()->prepare("SELECT entry.id FROM entry ORDER BY created_at DESC");
         $statement->execute();
         $allIds = $statement->fetchAll(\PDO::FETCH_COLUMN);
         if ($allIds) {

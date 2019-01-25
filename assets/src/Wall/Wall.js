@@ -10,7 +10,10 @@ class Wall extends React.Component {
 
     render() {
         if(!this.props.isLoggedIn){
-            return <Redirect to="/login"/>
+            return <Redirect  to={{
+                pathname: '/login',
+                state: {destination: "/"}
+            }}/>
         }
         return <div className="container">
             <CreateEntryForm/>

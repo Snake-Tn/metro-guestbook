@@ -21,7 +21,10 @@ class CreateEntryForm extends React.Component {
     }
 
     onEntryPosted() {
-        this.setState({successMessage: "Entry is written successfully on the guestbook ! it will be visible here after we review it."})
+        this.setState({
+            textContent: "",
+            successMessage: "Entry is written successfully to the guestbook ! it will be visible here after we review it."
+        })
     }
 
     onPostButtonClick() {
@@ -40,7 +43,7 @@ class CreateEntryForm extends React.Component {
         };
         request(options)
             .then(function (res) {
-               this.onEntryPosted();
+                this.onEntryPosted();
             }.bind(this))
             .catch(function () {
             });
@@ -70,7 +73,6 @@ class CreateEntryForm extends React.Component {
                                       url: 'http://localhost:8001/api/entries',
                                       revert: null,
                                       process: {
-                                          url: './process',
                                           method: 'POST',
                                           withCredentials: false,
                                           headers: {

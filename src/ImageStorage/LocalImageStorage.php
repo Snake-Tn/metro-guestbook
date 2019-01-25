@@ -52,6 +52,8 @@ class LocalImageStorage implements ImageStorageInterface
         switch ($type) {
             case 'image/jpeg':
                 return 'jpeg';
+            case 'image/png':
+                return 'png';
             default:
                 throw new \Exception(sprintf("not supported image type [type=%s]", $type));
         }

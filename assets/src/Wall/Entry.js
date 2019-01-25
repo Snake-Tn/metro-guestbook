@@ -9,7 +9,6 @@ class Entry extends React.Component {
     renderText() {
         return <div className="list-group-item list-group-item-action flex-column align-items-start">
             <p className="mb-1">{this.props.content}</p>
-
         </div>
     }
 

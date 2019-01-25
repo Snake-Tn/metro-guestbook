@@ -15,9 +15,9 @@ class Router
 
     const CONFIGURATION_MAP = [
         'POST/api/entries' => ['controller' => EntryController::class, 'method' => 'create'],
-        'POST/api/entries/([1-9]+)/is_approved' => ['controller' => EntryController::class, 'method' => 'approve'],
-        'PUT/api/entries/([1-9]+)' => ['controller' => EntryController::class, 'method' => 'update'],
-        'DELETE/api/entries/([1-9]+)' => ['controller' => EntryController::class, 'method' => 'delete'],
+        'POST/api/entries/([0-9]+)/is_approved' => ['controller' => EntryController::class, 'method' => 'approve'],
+        'PUT/api/entries/([0-9]+)' => ['controller' => EntryController::class, 'method' => 'update'],
+        'DELETE/api/entries/([0-9]+)' => ['controller' => EntryController::class, 'method' => 'delete'],
         'GET/api/entries' => ['controller' => EntryController::class, 'method' => 'list'],
         'GET/api/auth/token' => ['controller' => AuthorizationController::class, 'method' => 'login'],
         'GET/' => ['controller' => IndexController::class, 'method' => 'index'],

@@ -1,6 +1,7 @@
 import React from "react";
 import request from 'request-promise';
 import {Redirect} from 'react-router'
+import {withRouter} from 'react-router-dom';
 
 class Login extends React.Component {
 
@@ -36,8 +37,9 @@ class Login extends React.Component {
     }
 
     render() {
+        const redirectTo = this.props.location.state && this.props.location.state.destination ? this.props.location.state.destination : '/';
         return <div className="container">
-            {this.props.isLoggedIn && <Redirect to="/"/>}
+            {this.props.isLoggedIn && <Redirect to={redirectTo}/>}
             <div className="login-form row justify-content-center align-items-center">
                 <div className="col-4">
                     <div className="card">
@@ -53,13 +55,42 @@ class Login extends React.Component {
                                 </div>
                                 <div className="text-danger error">{this.state.error}</div>
                                 <button type="submit" value="submit" className="btn btn-primary">login</button>
+
                             </form>
+
                         </div>
+                        <br/>
+                        &nbsp; Demo accounts:
+                        <table className="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Login</th>
+                                <th scope="col">Password</th>
+                                <th scope="col">Role</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+
+                                <td>guest1</td>
+                                <td>guest1</td>
+                                <td>Guest</td>
+                            </tr>
+                            <tr>
+
+                                <td>admin1</td>
+                                <td>admin1</td>
+                                <td>Admin</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+
         </div>;
     }
 }
 
-export default Login;
+export default withRouter(Login);

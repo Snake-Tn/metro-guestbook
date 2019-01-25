@@ -2,12 +2,12 @@ import React, {Component} from "react";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 
 
-import Wall from './Wall';
+import Wall from './Wall/Wall';
 import Login from './Login';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
-import Admin from "./Admin";
+import Admin from "./Admin/Admin";
 import Header from "./Header";
 import Footer from "./Footer";
 

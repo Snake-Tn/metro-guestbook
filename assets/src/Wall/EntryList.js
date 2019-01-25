@@ -4,21 +4,15 @@ import Entry from "./Entry";
 
 class EntryList extends React.Component {
 
-    static defaultProps = {
-        filter: 'is_approved',
-        extraComponent: () => <div></div>,
-    }
-
     constructor(props) {
         super(props);
         this.state = {entries: []}
     }
 
     componentDidMount() {
-        const filter = this.props.filter;
         const options = {
             method: 'GET',
-            url: 'http://localhost:8001/api/entries?XDEBUG_SESSION_START=PHPSTORM&' + (filter.length ? filter : ''),
+            url: 'http://localhost:8001/api/entries?is_approved',
             headers: {
                 'Authorization': 'Bearer ' + JSON.parse(localStorage.token).access_token
             },
@@ -37,14 +31,12 @@ class EntryList extends React.Component {
 
     render() {
         const entriesComponents = this.state.entries.map(
-            (entry) => <div key={entry.id}><Entry  {...entry}/>
-                {this.props.extraComponent({id: "someid"})}
-            </div>
+            (entry) => <Entry key={entry.id} {...entry}/>
         );
         return <div>
             <h2 className="text-danger error">{this.state.error}</h2>
             {entriesComponents}
-            </div>
+        </div>
     }
 }
 
