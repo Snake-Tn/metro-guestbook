@@ -16,7 +16,16 @@ class EntryValidator implements ValidatorInterface
      */
     public function validate(array $entry): array
     {
-        return [];
+        $errors = [];
+        if (empty($entry['content'])) {
+            $errors[] = new ValidationError('empty_content', "Content is empty");
+        }
+
+        if (empty($entry['type'])) {
+            $errors[] = new ValidationError('type_content', "Type is empty");
+        }
+
+        return $errors;
     }
 
 }

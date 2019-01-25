@@ -1,9 +1,7 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: a.kooli
- * Date: 21.01.19
- * Time: 17:08
+ * Copyright © 2019 Ahmed Kooli. metro-guestbook challenge.
  */
 
 namespace Tests\Controller;

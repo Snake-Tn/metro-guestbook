@@ -12,6 +12,8 @@ use Builder\EntryBuilder;
 use Controller\Api\GuestNoteController;
 use Controller\EntryController;
 use Exception\NotFoundException;
+use ImageStorage\ImageStorageInterface;
+use Transformer\EntryToArrayTransformer;
 use Transformer\JsonToRestaurantCollectionConverter;
 use DataAccess\FileDataAccess;
 use Exception\BadRequestException;
@@ -32,7 +34,9 @@ class EntryControllerTest extends TestCase
         $controller = new EntryController(
             $this->createMock(TokenRepository::class),
             $this->createMock(EntryRepository::class),
-            $this->createMock(EntryBuilder::class)
+            $this->createMock(EntryBuilder::class),
+            $this->createMock(EntryToArrayTransformer::class),
+            $this->createMock(ImageStorageInterface::class)
         );
         $request = new Request();
         $controller->create($request);
@@ -49,7 +53,9 @@ class EntryControllerTest extends TestCase
         $controller = new EntryController(
             $tokenRepositoryMock,
             $this->createMock(EntryRepository::class),
-            $this->createMock(EntryBuilder::class)
+            $this->createMock(EntryBuilder::class),
+            $this->createMock(EntryToArrayTransformer::class),
+            $this->createMock(ImageStorageInterface::class)
         );
         $request = new Request();
         $request->setHeaders(['Authorization' => 'Bearer some_unkown_token']);
