@@ -3,8 +3,11 @@
 
 ## Architecture
 
-It's a Single Page Application having a frontend running on react and a backend providing a restful api.
-The api is totally decoupled/isolated and it can be used by any client : Browser, Mobile app or another service.
+The frontend is running on [React](https://reactjs.org/) and consuming a Restful API.
+The backend has 4 [Docker](https://www.docker.com/) containers: nginx, php-fpm, mariadb and redis.
+Redis is used to store users session.
+
+![app architecture](uml/app_design.svg? "app architecture")
 
 #### Database (MariaDB)
 
