@@ -3,7 +3,7 @@ import React from "react";
 class Entry extends React.Component {
 
     renderImage() {
-        return <img src={this.props.content} className="img-fluid img-thumbnail" alt="Responsive image"/>
+        return <img src={this.props.content} className="img-fluid img-thumbnail" alt=""/>
     }
 
     renderText() {

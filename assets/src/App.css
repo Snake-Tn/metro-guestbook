@@ -50,11 +50,17 @@ body {
     border-radius: 10%;
     height: 20px;
 }
-.admin-actions .btn{
+
+.admin-actions .btn {
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.admin-actions{
+.admin-actions {
     margin-bottom: 100px;
+}
+
+.logout-btn {
+
+    margin-left: 70%;
 }

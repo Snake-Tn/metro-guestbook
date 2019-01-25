@@ -16,10 +16,9 @@ class EntryList extends React.Component {
 
     componentDidMount() {
         const filter = this.props.filter;
-        console.log(filter)
         const options = {
             method: 'GET',
-            url: 'http://localhost:8001/api/entries?XDEBUG_SESSION_START=PHPSTORM&' + (filter.length ?  filter : ''),
+            url: 'http://localhost:8001/api/entries?XDEBUG_SESSION_START=PHPSTORM&' + (filter.length ? filter : ''),
             headers: {
                 'Authorization': 'Bearer ' + JSON.parse(localStorage.token).access_token
             },
@@ -28,10 +27,12 @@ class EntryList extends React.Component {
         request(options)
             .then(function (entries) {
                 this.setState({entries: entries});
+                return entries;
             }.bind(this))
-            .catch(function () {
+            .catch(function (err) {
 
-            });
+                this.setState({error: err.response.body.error});
+            }.bind(this));
     }
 
     render() {
@@ -40,7 +41,10 @@ class EntryList extends React.Component {
                 {this.props.extraComponent({id: "someid"})}
             </div>
         );
-        return <div>{entriesComponents}</div>
+        return <div>
+            <h2 className="text-danger error">{this.state.error}</h2>
+            {entriesComponents}
+            </div>
     }
 }
 

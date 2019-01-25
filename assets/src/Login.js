@@ -12,10 +12,6 @@ class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    isLoggedIn() {
-        return localStorage.token && (localStorage.token + '').length > 0;
-    }
-
     onLoginChange(event) {
         this.setState({login: event.target.value, error: ""});
     }
@@ -28,7 +24,8 @@ class Login extends React.Component {
         request('http://localhost:8001/api/auth/token?login=' + this.state.login + '&password=' + this.state.password)
             .then(function (response) {
                 localStorage.token = response;
-                this.setState({loggedIn: true});
+                this.props.setLoggedIn(true);
+                return response;
             }.bind(this))
             .catch(function (err) {
                 const body = JSON.parse(err.error);
@@ -40,7 +37,7 @@ class Login extends React.Component {
 
     render() {
         return <div className="container">
-            {this.isLoggedIn() && <Redirect to="/"/>}
+            {this.props.isLoggedIn && <Redirect to="/"/>}
             <div className="login-form row justify-content-center align-items-center">
                 <div className="col-4">
                     <div className="card">

@@ -19,13 +19,9 @@ class Admin extends React.Component {
         </div>
     }
 
-    isAdmin(){
-        return localStorage.token;
-    }
-
     render() {
-        if(!this.isAdmin()){
-            return <Redirect to="/"/>
+        if(!this.props.isLoggedIn){
+            return <Redirect to="/login"/>
         }
         return <div className="container">
             <EntryList extraComponent={this.renderAdminEntryActions} filter=""/>

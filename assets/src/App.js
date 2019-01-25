@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {BrowserRouter as Router, Route, Redirect} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 
 
 import Wall from './Wall';
@@ -12,13 +12,30 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {isLoggedIn: (typeof localStorage.token !== 'undefined')};
+        this.setLoggedIn = this.setLoggedIn.bind(this);
+    }
+
+    setLoggedIn(isLoggedIn) {
+        this.setState({isLoggedIn: isLoggedIn});
+    }
+
     render() {
         return <Router>
             <div>
-                <Header/>
-                <Route path="/" exact component={Wall}/>
-                <Route path="/admin" exact component={Admin}/>
-                <Route path="/login" exact component={Login}/>
+                <Header isLoggedIn={this.state.isLoggedIn} setLoggedIn={this.setLoggedIn}/>
+                <Route path="/" exact
+                       render={() => <Wall isLoggedIn={this.state.isLoggedIn}/>}
+                />
+                <Route path="/admin" exact
+                       render={() => <Admin isLoggedIn={this.state.isLoggedIn}/>}
+                />
+                <Route path="/login" exact
+                       render={() => <Login isLoggedIn={this.state.isLoggedIn} setLoggedIn={this.setLoggedIn}/>}
+                />
                 <Footer/>
             </div>
         </Router>
