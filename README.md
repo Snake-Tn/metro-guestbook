@@ -14,8 +14,10 @@ Redis is used to store user's session.
 ![Database schema](uml/db_design.png? "Database schema")
 
 #### Code design
-This source code reflects my oun perspective of **clean code**, bellow a list of the most important criteria:
+Bellow the class diagram containing the most relevent classes and relationships, in order to keep it readable, I skipped some infra-structure classes sush as Container and Router.
+![Classes diagram](uml/class_diagram.png? "Classes diagram")
 
+This source code reflects my oun perspective of **clean code**, bellow a list of the most important criteria:
 - Covered with unit-tests
 - Single responsibility principle.
 - Dependency injection.
