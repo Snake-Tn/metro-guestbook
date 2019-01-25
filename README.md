@@ -76,6 +76,8 @@ docker exec -it metro-guestbook_php bash -c "vendor/bin/phpunit"
 
 
 #### Application DEMO
-Application is accessible on http://localhost:8001
+Application is accessible on 
+- http://localhost:8001 (Guest book wall)
+- http://localhost:8001/admin (Guest book admin)
 
 
