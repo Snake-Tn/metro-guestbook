@@ -3,6 +3,9 @@ services:
   php:
     container_name: metro-guestbook_php
     build: ./docker/php
+    environment:
+      PHP_IDE_CONFIG: "serverName=docker"
+      XDEBUG_CONFIG: "idekey=PHPSTORM"
     volumes:
       - .:/var/application/metro-guestbook
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
