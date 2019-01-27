@@ -26,12 +26,6 @@ This source code reflects my oun perspective of **clean code**, bellow a list of
 - Clear method's contract : Do not use associative arrays to pass data around, Use objects.
 - Don't make me think : Avoid using 'clever' solutions, always go for the simplest and most straight forward implementation. 
 
-
-
-
-
-
-
 ## How to install
 This manual assumes that docker (`v>17`) and docker-compose (`v.3`) are both installed on your host machine.
 
@@ -43,37 +37,32 @@ git clone https://github.com/Snake-Tn/metro-guestbook.git
 cd metro-guestbook
 ```
 
-##### Create docker containers:
-```bash
-docker-compose up
-```
-Docker compose will create 4 containers, `php` , `ngnix` , `mariadb` and `redis`. 
-Once all containers are up and running, you can proceed to the next step.
-
 ##### Install php dependencies
 Composer will just install `phpunit` and generate our `autoload` script.
 
 **No Framework or libraries** are going to be installed.
 
 ```
-docker exec -it metro-guestbook_php bash -c "composer install"
+docker-compose run  --no-deps php bash -c "composer install && phpunit"
 ```
 
 ##### Install assets dependencies (ReactJs)
 frontend application is running on ReactJs.
 This step can take several minutes.
 ```
+command -v npm && (cd assets && npm install && npm run-script build) || \
 docker run  \
  --workdir="/assets" \
  --mount type=bind,source="$(pwd)"/assets,target=/assets,bind-propagation=rshared  \
  node:slim  /bin/bash -c "npm init -y && npm install && npm run-script build"
 
  ```
-##### Running unit tests
+##### Create docker containers:
 ```bash
-docker exec -it metro-guestbook_php bash -c "vendor/bin/phpunit"
+docker-compose up
 ```
-
+Docker compose will create 4 containers, `php` , `ngnix` , `mariadb` and `redis`. 
+Once all containers are up and running, you can proceed to the next step.
 
 #### Application DEMO
 Application is accessible on 
